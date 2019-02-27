@@ -174,65 +174,75 @@ class HomePage extends StatelessWidget {
 
   Widget graphWidget() {
     return Expanded(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 32.0, top: 24.0, right: 16.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Text("Days",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0
-                  ),
-                ),
-                SizedBox(width: 16.0),
-                Text("Months",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0
-                  ),
-                ),
-                Expanded(
-                  child: Text("(visitis in mins)",
-                    textAlign: TextAlign.end,
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 32.0, top: 24.0, right: 16.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text("Days",
                     style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
-                        fontSize: 15.0
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(width: 16.0),
+                  Text("Months",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0
+                    ),
+                  ),
+                  Expanded(
+                    child: Text("(visitis in mins)",
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                          fontSize: 15.0
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 24.0),
-          Container(
-            width: double.infinity,
-            height: 200.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                dayItem("28.01", 55),
-                dayItem("30.01", 58),
-                dayItem("01.02", 45),
-                dayItem("04.02", 25),
-                dayItem("06.02", 55),
-                dayItem("08.02", 45),
-                dayItem("11.02", 60),
-                dayItem("13.02", 45),
-              ],
-            ),
-          )
-        ],
+            SizedBox(height: 24.0),
+            Expanded(
+              child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return Container(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          dayItem("28.01", 55, constraints.maxHeight),
+                          dayItem("30.01", 58, constraints.maxHeight),
+                          dayItem("01.02", 45, constraints.maxHeight),
+                          dayItem("04.02", 25, constraints.maxHeight),
+                          dayItem("06.02", 55, constraints.maxHeight),
+                          dayItem("08.02", 45, constraints.maxHeight),
+                          dayItem("11.02", 60, constraints.maxHeight),
+                          dayItem("13.02", 45, constraints.maxHeight),
+                        ],
+                      ),
+                    );
+                  }
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
-  Widget dayItem(String day, int value) {
-    var barHeight = 200.0 * value / 100.0;
-    var offsetY = 200.0 - barHeight - 60.0;
+  Widget dayItem(String day, int value, double maxHeight) {
+    var barHeight = maxHeight * value / 100.0;
+    var offsetY = maxHeight - barHeight - 60.0;
 
     return Column(
       children: <Widget>[
