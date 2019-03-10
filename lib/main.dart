@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:s01e03/graph_widget.dart';
 
 const backgroundColor = Color(0xff5E37DB);
 
@@ -60,7 +61,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           userWidget(),
           pointsWidget(),
-          graphWidget(),
+          GraphWidget(),
           friendsWidget(),
         ],
       ),
@@ -169,102 +170,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget graphWidget() {
-    return Expanded(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 32.0, top: 24.0, right: 16.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text("Days",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0
-                    ),
-                  ),
-                  SizedBox(width: 16.0),
-                  Text("Months",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0
-                    ),
-                  ),
-                  Expanded(
-                    child: Text("(visitis in mins)",
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          color: Colors.white.withOpacity(0.7),
-                          fontSize: 15.0
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 24.0),
-            Expanded(
-              child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return Container(
-                      width: double.infinity,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          dayItem("28.01", 55, constraints.maxHeight),
-                          dayItem("30.01", 58, constraints.maxHeight),
-                          dayItem("01.02", 45, constraints.maxHeight),
-                          dayItem("04.02", 25, constraints.maxHeight),
-                          dayItem("06.02", 55, constraints.maxHeight),
-                          dayItem("08.02", 45, constraints.maxHeight),
-                          dayItem("11.02", 60, constraints.maxHeight),
-                          dayItem("13.02", 45, constraints.maxHeight),
-                        ],
-                      ),
-                    );
-                  }
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget dayItem(String day, int value, double maxHeight) {
-    var barHeight = maxHeight * value / 100.0;
-    var offsetY = maxHeight - barHeight - 60.0;
-
-    return Column(
-      children: <Widget>[
-        SizedBox(height: offsetY),
-        Text(value.toString(),
-            style: TextStyle(
-              color: Colors.greenAccent,
-            )
-        ),
-        SizedBox(height: 12.0,),
-        Container(
-          width: 2.0,
-          height: barHeight,
-          color: Colors.greenAccent,
-        ),
-        SizedBox(height: 12.0,),
-        Text(day,
-          style: TextStyle(
-            color: Colors.white.withOpacity(0.5),
-          ),
-        )
-      ],
     );
   }
 
